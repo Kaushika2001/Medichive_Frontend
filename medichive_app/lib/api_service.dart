@@ -35,4 +35,19 @@ class ApiService {
       throw Exception('Login failed: ${response.body}');
     }
   }
+
+  Future<Map<String, dynamic>> getProfile(String userId) async {
+    final url = Uri.parse('$baseUrl/lab/profile/$userId');
+
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to fetch profile: ${response.body}');
+    }
+  }
 }

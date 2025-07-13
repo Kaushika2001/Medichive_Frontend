@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'lab_report.dart'; 
 import 'qr_scan_page.dart';
 import 'complain_support_page.dart';
+import 'profile_page.dart';
 
 class LaboratoryScreen extends StatelessWidget {
-  const LaboratoryScreen({super.key});
+  final String? userId;
+  
+  const LaboratoryScreen({super.key, this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,20 @@ class LaboratoryScreen extends StatelessWidget {
             }),
             const SizedBox(height: 16),
             _buildButton(context, "Your Profile", () {
-              // TODO: Add your profile navigation logic
+              if (userId != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfilePage(userId: userId!),
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('User ID not available. Please login again.'),
+                  ),
+                );
+              }
             }),
             const SizedBox(height: 16),
             _buildButton(context, "View Reports", () {

@@ -38,21 +38,19 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     try {
-      await _apiService.login(email, password);
-
-      // You can store the response if needed:
-      // final response = await _apiService.login(email, password);
-      // final accessToken = response['access_token'];
-      // final message = response['message'];
+      final response = await _apiService.login(email, password);
+      final accessToken = response['access_token'];
+      final userId = response['user_id'];
+      final message = response['message'];
 
       setState(() {
         _isLoading = false;
         _loginFailed = false;
       });
 
-      // Navigate to lab screen on successful login
+      // Navigate to lab screen on successful login with user ID
       if (mounted) {
-        Navigator.pushNamed(context, '/lab');
+        Navigator.pushNamed(context, '/lab', arguments: userId);
       }
     } catch (e) {
       setState(() {

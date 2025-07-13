@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "D:/Medichive_Mobile-_App-2/medichive_app/linux"
+    "cmake.sourceDirectory": "D:/Medichive_Mobile-_App-2/medichive_app/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

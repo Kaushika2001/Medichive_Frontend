@@ -86,7 +86,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         '/login': (context) => const LoginScreen(),
-        '/lab': (context) => const LaboratoryScreen(),
+        '/lab': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as String?;
+          return LaboratoryScreen(userId: args);
+        },
         '/reports':
             (context) =>
                 const report1.LabReportsPage(), // ✅ from lab_report.dart
