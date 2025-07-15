@@ -65,4 +65,35 @@ class ApiService {
       throw Exception('Failed to fetch lab profile: ${response.body}');
     }
   }
+
+  Future<List<dynamic>> getLabReports() async {
+    final url = Uri.parse('$baseUrl/lab/lab-reports');
+
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to fetch lab reports: ${response.body}');
+    }
+  }
+
+  Future<void> uploadLabReport(int id, String description, String name) async {
+    final url = Uri.parse('$baseUrl/lab/lab-reports');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'id': id,
+        'description': description,
+        'name': name,
+      }),
+    );
+    if (response.statusCode != 201) {
+      throw Exception('Failed to upload report: ${response.body}');
+    }
+  }
 }
